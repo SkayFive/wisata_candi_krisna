@@ -183,18 +183,23 @@ class DetailScreen extends StatelessWidget {
                                         width: 2,
                                       ),
                                     ),
-                                    child: CachedNetworkImage(
-                                      imageUrl: candi.imageUrls[index],
-                                      width: 120,
-                                      height: 120,
-                                      fit: BoxFit.cover,
-                                      placeholder: (context, url) => Container(
+                                    child: ClipRRect(
+                                      borderRadius:
+                                          BorderRadiusGeometry.circular(10),
+                                      child: CachedNetworkImage(
+                                        imageUrl: candi.imageUrls[index],
                                         width: 120,
                                         height: 120,
-                                        color: Colors.deepPurple[50],
+                                        fit: BoxFit.cover,
+                                        placeholder: (context, url) =>
+                                            Container(
+                                              width: 120,
+                                              height: 120,
+                                              color: Colors.deepPurple[50],
+                                            ),
+                                        errorWidget: (context, url, error) =>
+                                            Icon(Icons.error),
                                       ),
-                                      errorWidget: (context, url, error) =>
-                                          Icon(Icons.error),
                                     ),
                                   ),
                                 ),
