@@ -56,8 +56,10 @@ class DetailScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 16),
+
                   //Info Atas (Nama Candi dan tombol favorit)
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         candi.name,
@@ -130,7 +132,10 @@ class DetailScreen extends StatelessWidget {
                     children: [
                       Text(
                         'Deskripsi',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
                       ),
                     ],
                   ),
@@ -138,25 +143,20 @@ class DetailScreen extends StatelessWidget {
                   SizedBox(height: 12),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: const Text(
-                      'Candi Borobudur, candi Buddha terbesar di dunia,'
-                      'dibangun oleh para penganut Buddha Mahayana pada abad ke-9 di Jawa Tengah,'
-                      'Indonesia. Memiliki enam teras persegi dan tiga pelataran melingkar yang dipenuhi'
-                      'relief serta arca Buddha, Borobudur menjadi tempat suci untuk memuliakan Buddha sekaligus'
-                      'panduan ziarah menuju pencerahan. Meskipun sempat ditinggalkan pada abad ke-10, candi ini'
-                      'ditemukan kembali pada tahun 1814 dan, setelah melalui pemugaran besar-besaran, diakui'
-                      'sebagai Situs Warisan Dunia oleh UNESCO.',
+                    child: Text(
+                      '${candi.description}',
                       textAlign: TextAlign.justify,
                     ),
                   ),
 
                   //Detail gallery
+                  SizedBox(height: 16),
+                  Divider(color: Colors.deepPurple.shade100),
                   Padding(
                     padding: const EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Divider(color: Colors.deepPurple.shade100),
                         Text(
                           'Gallery',
                           style: TextStyle(
