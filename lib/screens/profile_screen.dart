@@ -12,10 +12,10 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   // TODO: 1 Deklarasi variabel yang dibuthkan
-  bool isSignedIn = true;
-  String fullName = '';
-  String userName = '';
-  int favoriteCandiCount = 0;
+  bool isSignedIn = false;
+  String fullName = 'Clemens Mere Krisna Jemarut';
+  String userName = 'SkayFive';
+  int favoriteCandiCount = 150;
 
   // TODO: 5. Implementasi fungsi signin
   void signIn() {
@@ -74,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             onPressed: () {},
                             icon: Icon(
                               Icons.camera_alt,
-                              color: Colors.deepPurple[50],
+                              color: Colors.deepPurple[200],
                             ),
                           ),
                       ],
@@ -90,15 +90,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   icon: Icons.lock,
                   label: 'Pengguna',
                   value: userName,
-                  showEditIcon: isSignedIn,
+                  // showEditIcon: isSignedIn,
                   onEditPressed: () {
                     debugPrint('Icon Edit Ditekan');
                   },
                   iconColor: Colors.amber,
                 ),
-
-                SizedBox(height: 20),
+                SizedBox(height: 4),
                 Divider(color: Colors.deepPurple[100]),
+
                 SizedBox(height: 10),
                 ProfileIntoItem(
                   icon: Icons.person,
@@ -110,15 +110,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   },
                   iconColor: Colors.blue,
                 ),
-
-                SizedBox(height: 20),
+                SizedBox(height: 4),
                 Divider(color: Colors.deepPurple[100]),
+
                 SizedBox(height: 10),
                 ProfileIntoItem(
                   icon: Icons.favorite,
                   label: 'favorite',
                   value: favoriteCandiCount,
-                  showEditIcon: isSignedIn,
+                  // showEditIcon: isSignedIn,
                   onEditPressed: () {
                     debugPrint('Icon Edit Ditekan');
                   },
@@ -128,6 +128,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 // TODO: 4 Buat profileAction yang berisi TextButton sign in/out
                 SizedBox(height: 4),
                 Divider(color: Colors.deepPurple[100]),
+
                 SizedBox(height: 20),
                 isSignedIn
                     ? TextButton(onPressed: (signOut), child: Text('Sign Out'))
