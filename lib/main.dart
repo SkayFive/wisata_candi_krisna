@@ -21,6 +21,10 @@ class MyApp extends StatelessWidget {
       ),
       // home: DetailScreen(candi: candiList[0]),
       home: ProfileScreen(),
+
+      sadasdasjknfdjjsnddnslka
+      asdasdafmnds
+      KRISNAAA IDIOTTTT
     );
   }
 }
