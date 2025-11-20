@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:wisata_candi_krisna/data/candi_data.dart';
+// import 'package:wisata_candi_krisna/data/candi_data.dart';
 import 'package:wisata_candi_krisna/main.dart';
 
 void main() {
