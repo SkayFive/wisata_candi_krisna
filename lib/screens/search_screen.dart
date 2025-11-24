@@ -101,7 +101,7 @@ class _SearchScreenState extends State<SearchScreen> {
               itemBuilder: (context, index) {
                 final candi = _filteredCandis[index];
 
-                //.TODO 8 : Implementasi GesturDetector dan hera Aniimation
+                //.TODO 8 : Implementasi GesturDetector dan hera Animation
 
                 return Card(
                   margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),

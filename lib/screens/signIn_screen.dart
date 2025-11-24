@@ -11,7 +11,6 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   //TODO: 1. Deklarasikan variabel
   final TextEditingController _usernamecontroller = TextEditingController();
-
   final TextEditingController _passwordcontroller = TextEditingController();
 
   String _errorText = '';
