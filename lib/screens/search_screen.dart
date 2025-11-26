@@ -77,8 +77,12 @@ class _SearchScreenState extends State<SearchScreen> {
                 //TODO 6 :Implementasi fitur pencarian
                 controller: _searchController,
                 decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25),
+                    borderSide: BorderSide(color: Colors.deepPurple)
+                  ),
                   hintText: 'Cari Candi..',
-                  prefixIcon: Icon(Icons.search),
+                  prefixIcon: Icon(Icons.search,),
 
                   //TODO 7 : Implementasikan pengosongan Input
                   border: InputBorder.none,

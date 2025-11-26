@@ -1,16 +1,17 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class SignInScreen extends StatefulWidget {
-  SignInScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   //TODO: 1. Deklarasikan variabel
   final TextEditingController _usernamecontroller = TextEditingController();
+  final TextEditingController _namecontroller = TextEditingController();
   final TextEditingController _passwordcontroller = TextEditingController();
 
   String _errorText = '';
@@ -23,8 +24,18 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       //TODO: 2. Pasang AppBar
-      appBar: AppBar(title: Text('Sign In')),
-
+      appBar: AppBar(
+        title: Text(
+          'Sign up',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        // Membuat Teks judul di Appbar Ke tengah
+        // centerTitle: true,
+        // Membuat Warna Appbar Menjadi biru
+        // backgroundColor: Colors.blue,
+        // Membuat Bayangan di Appbar
+        elevation: 10,
+      ),
       //TODO: 3. Pasang body
       body: Center(
         child: SingleChildScrollView(
@@ -44,14 +55,21 @@ class _SignInScreenState extends State<SignInScreen> {
                       border: OutlineInputBorder(),
                     ),
                   ),
-
-                  //TODO: 6. Pasang TextFormField kata sandi
+                  //TODO: 6. Pasang TextFormField Nama Lengkap
+                  SizedBox(height: 20),
+                  TextFormField(
+                    controller: _namecontroller,
+                    decoration: InputDecoration(
+                      labelText: 'Nama Lengkap',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  //TODO: 7. Pasang TextFormField kata sandi
                   SizedBox(height: 20),
                   TextFormField(
                     controller: _passwordcontroller,
                     decoration: InputDecoration(
-                      labelText: 'Kata Sandi',
-                      errorText: _errorText.isNotEmpty ? _errorText : null,
+                      labelText: 'Kata sandi',
                       border: OutlineInputBorder(),
                       suffixIcon: IconButton(
                         onPressed: () {
@@ -69,32 +87,33 @@ class _SignInScreenState extends State<SignInScreen> {
                     obscureText: _obscurePassword,
                   ),
 
-                  //TODO: 7. Pasang ElevatedButton untuk sign in
+                  //TODO:8. Pasangkan Elevatedbutton Sign Up
                   SizedBox(height: 20),
-                  ElevatedButton(onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/');
-                  }, child: Text('Sign In')),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, '/signin');
+                    },
+                    child: Text("Sign Up"),
+                  ),
 
-                  //TODO: 8. Pasang TextButton sign up
-                  SizedBox(height: 10),
-
+                  //TODO: 9. Pasang elevatedbutton Sign In
+                  SizedBox(height: 20),
                   RichText(
                     text: TextSpan(
-                      text: 'Belum punya akun? ',
-                      style: TextStyle(fontSize: 16, color: Colors.deepPurple),
+                      text: 'Sudah Punya Akun? ',
+                      style: TextStyle(fontSize: 16, color: Colors.black),
                       children: <TextSpan>[
                         TextSpan(
-                          text: 'Daftar di sini',
+                          text: 'Login',
                           style: TextStyle(
-                            color: Colors
-                                .blue, // warna untuk teks yang bisa ditekan
-                            decoration: TextDecoration.underline,
                             fontSize: 16,
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline,
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              Navigator.pushNamed(context, 'signup');
-                            }, // Aksi ketika teks ditekan
+                              Navigator.pushNamed(context, '/signin');
+                            },
                         ),
                       ],
                     ),
