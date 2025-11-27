@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wisata_candi_krisna/models/candi.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -13,6 +14,51 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   bool isFavorite = false;
+  bool isSignedIn = false; // menyimpan status sign in
+
+  @override
+  void initState() {
+    super.initState();
+    _checkSignInStatus(); // Memeriksa status sign in saat layar dimuat
+    _loadFavoriteStatus(); // Memeriksa status favorit saat layar dimuat
+  }
+
+  // Memeriksa Status Sign in
+  void _checkSignInStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool signedIn = prefs.getBool('isSignedIn') ?? false;
+    setState(() {
+      isSignedIn = signedIn;
+    });
+  }
+
+  // Memeriksa Status Favorit
+  void _loadFavoriteStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool favorite = prefs.getBool('Favorite_${widget.candi.name}') ?? false;
+    setState(() {
+      isFavorite = favorite;
+    });
+  }
+
+  Future<void> _toggleFavorite() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // Memeriksa apakah pengguna sudah sign in
+    if (!isSignedIn) {
+      // Jika belum sign in, arahkan ke signIn
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacementNamed(context, '/signin');
+      });
+      return;
+    }
+
+    bool favoriteStatus = !isFavorite;
+    prefs.setBool('Favorite_${widget.candi.name}', favoriteStatus);
+
+    setState(() {
+      isFavorite = favoriteStatus;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,14 +123,14 @@ class _DetailScreenState extends State<DetailScreen> {
                       IconButton(
                         iconSize: 30,
                         icon: Icon(
-                          isFavorite ? Icons.favorite : Icons.favorite_border,
-                          color: isFavorite ? Colors.red.shade600 : Colors.grey,
+                          isSignedIn && isFavorite
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color: isSignedIn && isFavorite ? Colors.red : null,
                         ),
 
                         onPressed: () {
-                          setState(() {
-                            isFavorite = !isFavorite;
-                          });
+                          _toggleFavorite();
                         },
                       ),
                     ],

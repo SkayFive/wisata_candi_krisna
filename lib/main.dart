@@ -33,9 +33,10 @@ class MyApp extends StatelessWidget {
         ).copyWith(primary: Colors.deepPurple, surface: Colors.deepPurple[50]),
         useMaterial3: true,
       ),
-      initialRoute: '/signin',
+      home: MainScreen(),
+      initialRoute: '/',
       routes: {
-        '/': (context) => const MainScreen(),
+        '/homescreen': (context) => const HomeScreen(),
         '/signin': (context) => SignInScreen(),
         '/signup': (context) => const SignUpScreen(),
       },

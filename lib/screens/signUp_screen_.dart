@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -15,10 +16,43 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordcontroller = TextEditingController();
 
   String _errorText = '';
-
-  bool _isSignedIn = false;
-
   bool _obscurePassword = true;
+
+  // TODO: 1. Membuat fungsi signup
+  void _signup() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String username = _usernamecontroller.text.trim();
+    final String name = _namecontroller.text.trim();
+    final String password = _passwordcontroller.text.trim();
+
+    if (password.length < 8 ||
+        !password.contains(RegExp(r'[A-Z]')) ||
+        !password.contains(RegExp(r'[a-z]')) ||
+        !password.contains(RegExp(r'[0-9]')) ||
+        !password.contains(RegExp(r'[!@#$%^&*(),.?"{}|<>]'))) {
+      setState(() {
+        _errorText =
+            'Minimal m8 karakter, kombinasi [A-Z], [a-z], [0-9], [!@#\\\$%^&*(),.?"{}:<>]';
+      });
+      return;
+    }
+    // Simpan data  pengguna di SharedPreferences
+    prefs.setString('username', username);
+    prefs.setString('name', name);
+    prefs.setString('password', password);
+
+    // Buat navigasi ke halaman SignIn Screen
+    Navigator.pushReplacementNamed(context, '/signin');
+  }
+
+  @override
+  void dispose() {
+    _usernamecontroller.dispose();
+    _namecontroller.dispose();
+    _passwordcontroller.dispose();
+    // TODO: Implementasi dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +104,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     controller: _passwordcontroller,
                     decoration: InputDecoration(
                       labelText: 'Kata sandi',
+                      errorText: _errorText.isNotEmpty ? _errorText : null,
                       border: OutlineInputBorder(),
                       suffixIcon: IconButton(
                         onPressed: () {
